@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "RoomPage.module.css";
+import styles from "./RoomPage.module.css";
 
 const RoomPage = () => {
     return(
