@@ -1,0 +1,41 @@
+.btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.joinBtn{
+    cursor: pointer;
+    width: 180px;
+    padding: 0.5rem 0;
+    background-color: #2d8cff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    color: white;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.joinBtn:hover{
+    background-color: #3475c4; 
+}
+
+.hostBtn{
+    cursor: pointer;
+    width: 180px;
+    padding: 0.5rem 0;
+    background-color: #c2bebe5d;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    color: black;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+}
+
+.hostBtn:hover{
+    background-color: #8a888881;
+}

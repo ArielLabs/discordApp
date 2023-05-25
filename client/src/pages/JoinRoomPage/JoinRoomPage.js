@@ -3,7 +3,7 @@ import styles from "./JoinRoomPage.module.css";
 
 const JoinRoomPage = () => {
     return(
-        <div></div>
+        <div>join</div>
     );
 }
 
