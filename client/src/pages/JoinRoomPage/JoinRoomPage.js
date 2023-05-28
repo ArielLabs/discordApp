@@ -9,8 +9,7 @@ import styles from "./JoinRoomPage.module.css";
 const JoinRoomPage = () => {
   const [roomId, setRoomId] = useState("");
   const [name, setName] = useState("");
-  const [optionAudio, setOptionAudio] = useState(false);
-  const isRoomHost = useSelector((state) => state.room.isRoomHost);
+  const { isRoomHost, connectWithAudio } = useSelector((state) => state.room);
   const dispatch = useDispatch();
   const search = useLocation().search;
 
@@ -32,7 +31,7 @@ const JoinRoomPage = () => {
   };
 
   const changeOptionAudioHandler = (event) => {
-    setOptionAudio(event.target.checked);
+    dispatch(roomActions.setConnectWithAudio(event.target.checked));
   }
 
   const titleText = isRoomHost ? "Host meeting" : "Join meeting";
@@ -61,7 +60,7 @@ const JoinRoomPage = () => {
           label="Only audio"
           control={
             <Checkbox
-                checked={optionAudio}
+                checked={connectWithAudio}
                 onChange={changeOptionAudioHandler} 
             />
           }
