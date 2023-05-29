@@ -39,12 +39,21 @@ const JoinRoomPage = () => {
   };
 
   const joinRoomHandler = () => {
-    isExistsRoom();
+    dispatch(roomActions.setIdentity(name));
+    if(isRoomHost){
+      createRoom();
+    }else{
+      isExistsRoom();
+    }
   };
 
   const cancelHandler = () => {
     navigate('/');
   };
+
+  const createRoom = () => {
+    navigate('/room');
+  }
 
   const checkIsExistsRoom = () => {
     const roomExistsUrl = `http://localhost:5000/api/roomExists/${roomId}`;
@@ -61,7 +70,8 @@ const JoinRoomPage = () => {
         if(full){
           setError("Meeting is full, please try again later.");
         }else{
-
+          dispatch(roomActions(setRoomId(roomId)));
+          navigate('/room');
         }
       }else{
         setError("Meeting not found, check your meeting id.");
