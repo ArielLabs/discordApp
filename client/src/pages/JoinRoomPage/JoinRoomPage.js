@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { roomActions } from "../../store/room";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import styles from "./JoinRoomPage.module.css";
@@ -9,6 +11,7 @@ import styles from "./JoinRoomPage.module.css";
 const JoinRoomPage = () => {
   const [roomId, setRoomId] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
   const { isRoomHost, connectWithAudio } = useSelector((state) => state.room);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,12 +39,35 @@ const JoinRoomPage = () => {
   };
 
   const joinRoomHandler = () => {
-    console.log('joining');
+    isExistsRoom();
   };
 
   const cancelHandler = () => {
     navigate('/');
   };
+
+  const checkIsExistsRoom = () => {
+    const roomExistsUrl = `http://localhost:5000/api/roomExists/${roomId}`;
+    return axios.get(roomExistsUrl);
+  }
+
+  const { refetch: isExistsRoom} = useQuery({
+    queryKey: 'exists-room',
+    queryFn: checkIsExistsRoom,
+    enabled: false,
+    onSuccess: (res) => {
+      const { roomExists, full } = res.data;
+      if(roomExists){
+        if(full){
+          setError("Meeting is full, please try again later.");
+        }else{
+
+        }
+      }else{
+        setError("Meeting not found, check your meeting id.");
+      }
+    }
+  })
 
   const titleText = isRoomHost ? "Host meeting" : "Join meeting";
   const btnText = isRoomHost ? "Host" : "Join";
@@ -76,6 +102,9 @@ const JoinRoomPage = () => {
               />
             }
           />
+        </div>
+        <div className={styles.errorArea}>
+          <p className={styles.error}>{error}</p>
         </div>
         <div className={styles.action}>
           <button className={styles.btnRoom} onClick={joinRoomHandler}>{btnText}</button>

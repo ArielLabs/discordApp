@@ -10,9 +10,9 @@
     border: 1px solid grey;
     border-radius: 5px;
     box-shadow: 2px 4px 8px 0px rgba(0,0,0,0.25);
-    width: 20%;
-    max-width: 300px;
-    height: 40%;
+    width: 25%;
+    max-width: 350px;
+    height: 45%;
     padding: 0rem 1.5rem;
 }
 
@@ -29,6 +29,7 @@
     flex-direction: column;
     justify-content: space-around;
     height: 100px;
+    width: 300px;
 }
 
 .joinInput{
@@ -80,4 +81,24 @@
 
 .btnCancel:hover{
     background-color: rgb(235, 235, 235);
+}
+
+.errorArea{
+    height: 5%;
+}
+
+.error{
+    color: red;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-height: 720px) {
+    .joinRoomPanel{
+        width: 40%;
+        height: 65%;
+    }
 }
