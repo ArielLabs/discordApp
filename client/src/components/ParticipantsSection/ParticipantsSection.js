@@ -3,7 +3,9 @@ import styles from "./ParticipantsSection.module.css";
 
 const ParticipantsSection = () => {
     return(
-        <div></div>
+        <div className={styles.participantsContainer}>
+            participants
+        </div>
     );
 }
 

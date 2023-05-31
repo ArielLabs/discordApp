@@ -3,7 +3,9 @@ import styles from "./ChatSection.module.css";
 
 const ChatSection = () => {
     return(
-        <div></div>
+        <div className={styles.chatContainer}>
+            chat
+        </div>
     );
 }
 

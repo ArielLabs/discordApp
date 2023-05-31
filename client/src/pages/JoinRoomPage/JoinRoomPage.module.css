@@ -99,6 +99,6 @@ p{
 @media screen and (max-height: 720px) {
     .joinRoomPanel{
         width: 40%;
-        height: 65%;
+        height: 75%;
     }
 }
