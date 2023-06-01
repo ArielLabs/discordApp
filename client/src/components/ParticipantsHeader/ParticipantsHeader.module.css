@@ -1,0 +1,26 @@
+.header{
+    background-color: #44374a;
+    height: 8%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title{
+    color: white;
+    font: inherit;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.amount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+}
