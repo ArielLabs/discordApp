@@ -24,3 +24,17 @@
     height: 45px;
     font-size: 1.1rem;
 }
+
+@media screen and (max-height: 720px) {
+    .header{
+        height: 10%;
+    }
+    .title{
+        font-size: 1.1rem;
+    }
+    .amount{
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+}
