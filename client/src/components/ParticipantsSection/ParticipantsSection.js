@@ -15,7 +15,7 @@ const ParticipantsSection = () => {
     <div className={styles.participantsContainer}>
       <ParticipantsHeader number={dummy.length} />
       {dummy.map((participant) => (
-        <ParticipantItem id={participant.id} name={participant.identity} />
+        <ParticipantItem key={participant.id} name={participant.identity} />
       ))}
     </div>
   );

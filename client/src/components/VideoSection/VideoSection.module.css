@@ -1,7 +1,8 @@
 .videoContainer{
-    width: 55%;
+    width: 60%;
     height: 100%;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
     background-color: #1d1d1dfc;

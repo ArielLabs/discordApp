@@ -1,0 +1,28 @@
+.buttonsContainer{
+    height: 10%;
+    width: 65%;
+    background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+    border-radius: 15px 15px 0px 0px;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.leaveBtn{
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    background-color: white;
+    color: purple;
+    border: 1px solid purple;
+    border-radius: 5px;
+    box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.25);
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.leaveBtn:hover{
+    background-color: purple;
+    color: white;
+}
