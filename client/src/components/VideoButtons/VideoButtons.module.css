@@ -1,5 +1,5 @@
 .buttonsContainer{
-    height: 10%;
+    height: 7%;
     width: 65%;
     background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
     border-radius: 15px 15px 0px 0px;
@@ -25,4 +25,10 @@
 .leaveBtn:hover{
     background-color: purple;
     color: white;
+}
+
+@media screen and (max-height: 720px) {
+    .buttonsContainer{
+        height: 10%;
+    }
 }
