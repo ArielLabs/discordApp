@@ -70,6 +70,26 @@ const joinRoom = (socket, data) => {
 };
 
 
+const disconnection = (socket) => {
+    const userLeave = allConnectedUsers.find((user) => user.socketId === socket.id);
+
+    if(userLeave){
+        allConnectedUsers = allConnectedUsers.filter((user) => user.socketId !== socket.id);
+
+        const room = allRooms.find((room) => room.id === userLeave.roomId);
+        room.connectedUsers = (room.connectedUsers).filter((user) => user.userId !== userLeave.userId);
+    
+        socket.leave(userLeave.roomId);
+
+        if(room.connectedUsers.length > 0){
+            io.to(room.id).emit("room-update", {connectedUsers: room.connectedUsers});
+        }else{
+            allRooms = allRooms.filter((r) => r.id !== room.id);
+        }
+    }
+};
+
+
 io.on('connection', (socket) => {
     console.log(`user ${socket.id} - connect`);
 
@@ -79,6 +99,11 @@ io.on('connection', (socket) => {
     
     socket.on("join-room", (data) => {
         joinRoom(socket, data);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`user ${socket.id} - disconnect`);
+        disconnection(socket);
     })
 })
 
