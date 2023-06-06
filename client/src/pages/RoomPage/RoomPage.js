@@ -8,14 +8,15 @@ import styles from "./RoomPage.module.css";
 
 const RoomPage = () => {
   const { id, identity, isRoomHost } = useSelector((state) => state.room);
+
   useEffect(() => {
     getLocalPreviewAndInitRoomConnection(isRoomHost, identity, id);
-  }, [id, identity, isRoomHost]);
+  }, [identity, isRoomHost]);
 
   return (
     <div className={styles.roomPage}>
       <ParticipantsSection />
-      <VideoSection />
+      <VideoSection roomId={id} />
       <ChatSection />
     </div>
   );

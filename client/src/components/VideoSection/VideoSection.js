@@ -1,14 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import RoomLabel from "../RoomLabel/RoomLabel";
 import VideoButtons from "../VideoButtons/VideoButtons";
 import styles from "./VideoSection.module.css";
 
-const VideoSection = () => {
-    const { id } = useSelector((state) => state.room);
+const VideoSection = (props) => {
     return(
         <div className={styles.videoContainer}>
-            <RoomLabel roomId="1234-exn93" />
+            <RoomLabel id={props.roomId} />
             <VideoButtons />
         </div>
     );
