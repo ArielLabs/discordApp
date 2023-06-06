@@ -6,8 +6,14 @@ const webSocket = socketIO(SERVER);
 
 export const connectWithSocketIOServer = (dispatch) => {
     webSocket.connect();
+
     webSocket.on('room-id', ({roomId}) => {
         dispatch(roomActions.setRoomId(roomId));
+    });
+
+    webSocket.on('room-update', (data) => {
+        const { connectedUsers } = data;
+        dispatch(roomActions.setParticipants(connectedUsers));
     })
 }
 

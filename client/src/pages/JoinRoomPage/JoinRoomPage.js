@@ -24,7 +24,7 @@ const JoinRoomPage = () => {
     } else {
       dispatch(roomActions.setIsRoomHost(false));
     }
-  }, []);
+  }, [dispatch, search]);
 
   const changeRoomIdHandler = (event) => {
     setRoomId(event.target.value);

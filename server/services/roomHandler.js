@@ -26,6 +26,8 @@ const createNewRoom = (socket, data) => {
   allRooms.push(newRoom);
 
   socket.emit('room-id', {roomId: roomId});
+
+  socket.emit("room-update", {connectedUsers: newRoom.connectedUsers});
 };
 
 export const roomHandler = (socket) => {

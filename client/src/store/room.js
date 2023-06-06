@@ -4,7 +4,8 @@ const initRoomState = {
     id: null,
     identity: '',
     isRoomHost: false,
-    connectWithAudio: false
+    connectWithAudio: false,
+    participants: []
 }
 
 const roomSlice = createSlice({
@@ -22,6 +23,9 @@ const roomSlice = createSlice({
         },
         setConnectWithAudio(state, action){
             state.connectWithAudio = action.payload;
+        },
+        setParticipants(state, action){
+            state.participants = [...action.payload];
         }
     }
 })
