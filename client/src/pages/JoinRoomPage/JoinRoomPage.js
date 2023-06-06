@@ -70,7 +70,7 @@ const JoinRoomPage = () => {
         if(full){
           setError("Meeting is full, please try again later.");
         }else{
-          dispatch(roomActions(setRoomId(roomId)));
+          dispatch(roomActions.setRoomId(roomId));
           navigate('/room');
         }
       }else{

@@ -30,8 +30,33 @@ const createNewRoom = (socket, data) => {
   socket.emit("room-update", {connectedUsers: newRoom.connectedUsers});
 };
 
+
+const joinRoom = (socket, data) => {
+  const { identity, roomId } = data;
+
+  const newUser = {
+    username: identity,
+    userId: uuidv4(),
+    roomId: roomId,
+    socketId: socket.id
+  }
+
+  allConnectedUsers.push(newUser);
+
+  chosenRoom = allRooms.filter((room) => room.id === roomId);
+  chosenRoom.connectedUsers.push(newUser);
+
+  socket.join(roomId);
+
+  socket.emit("room-update", {connectedUsers: chosenRoom.connectedUsers});
+}
+
 export const roomHandler = (socket) => {
   socket.on("create-new-room", (data) => {
     createNewRoom(socket, data);
   });
+
+  socket.on("join-room", (data) => {
+    joinRoom(socket, data);
+  })
 };
