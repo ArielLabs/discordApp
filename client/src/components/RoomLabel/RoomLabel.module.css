@@ -1,5 +1,5 @@
 .roomLabel{
-    width: 35%;
+    width: 45%;
     height: 5%;
     background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
     color: white;
@@ -10,6 +10,10 @@
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 500;
+}
+
+.roomId{
+    font-size: 1rem;
 }
 
 

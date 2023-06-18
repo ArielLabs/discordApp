@@ -1,4 +1,5 @@
 import { roomActions } from "../store/room";
+import { prepareNewPeerConnection, signalingDataHandler } from "../services/webRTC";
 import socketIO from "socket.io-client";
 
 const SERVER = "http://localhost:5000";
@@ -14,6 +15,22 @@ export const connectWithSocketIOServer = (dispatch) => {
     webSocket.on('room-update', (data) => {
         const { connectedUsers } = data;
         dispatch(roomActions.setParticipants(connectedUsers));
+    });
+
+    webSocket.on('connection-prepare', (data) => {
+        const { newUserSocketId } = data;
+        prepareNewPeerConnection(newUserSocketId, false, dispatch);
+
+        webSocket.emit("connection-init", { newUserSocketId: newUserSocketId });
+    });
+
+    webSocket.on('connection-signal', (data) => {
+        signalingDataHandler(data);
+    });
+
+    webSocket.on("connection-init", (data) => {
+        const { existingUser } = data;
+        prepareNewPeerConnection(existingUser, true, dispatch);
     })
 }
 
@@ -32,4 +49,8 @@ export const joinRoom = (identity, roomId) => {
     }
 
     webSocket.emit('join-room', data);
+}
+
+export const signalPeerData = (data) => {
+    webSocket.emit('connection-signal', data);
 }

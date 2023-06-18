@@ -5,7 +5,8 @@ const initRoomState = {
     identity: '',
     isRoomHost: false,
     connectWithAudio: false,
-    participants: []
+    participants: [],
+    streams: []
 }
 
 const roomSlice = createSlice({
@@ -26,6 +27,9 @@ const roomSlice = createSlice({
         },
         setParticipants(state, action){
             state.participants = [...action.payload];
+        },
+        setStreams(state, action){
+            state.streams.push(action.payload);
         }
     }
 })

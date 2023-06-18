@@ -66,8 +66,39 @@ const joinRoom = (socket, data) => {
   
     socket.join(roomId);
 
+    // emit to all users which are already in this room to prepare peer connection
+    (chosenRoom.connectedUsers).forEach(user => {
+        if(user.socketId !== newUser.socketId){
+            const data = {
+                newUserSocketId: newUser.socketId
+            };
+            io.to(user.socketId).emit('connection-prepare', data);
+        }
+    });
+
     io.to(roomId).emit("room-update",  {connectedUsers: chosenRoom.connectedUsers});
 };
+
+
+const signaling = (socket, data) => {
+    const { signal, newUserSocketId } = data;
+
+    const signalingData = {
+        signal: signal,
+        existSocketId: socket.id
+    }
+    io.to(newUserSocketId).emit("connection-signal", signalingData);
+} 
+
+// information from clients which are already in room that they have prepared for incoming connection
+const initializeConnect = (socket, data) => {
+    const { newUserSocketId } = data;
+
+    const initData = {
+        existingUser: socket.id
+    }
+    io.to(newUserSocketId).emit("connection-init", initData);
+}
 
 
 const disconnection = (socket) => {
@@ -100,6 +131,14 @@ io.on('connection', (socket) => {
     socket.on("join-room", (data) => {
         joinRoom(socket, data);
     });
+
+    socket.on("connection-signal", (data) => {
+        signaling(socket, data);
+    });
+
+    socket.on("connection-init", (data) => {
+        initializeConnect(socket, data);
+    })
 
     socket.on('disconnect', () => {
         console.log(`user ${socket.id} - disconnect`);
