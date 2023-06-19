@@ -1,0 +1,52 @@
+.videoPortals{
+    width: 95%;
+    height: 85%;
+}
+
+.box {
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 50%;
+}
+
+.fullBoxScreen{
+    box-sizing: none;
+    position: absolute;
+    width: 88%;
+    height: 88%;
+    top: 8%;
+    left: 5%;
+}
+
+.videoPlayer{
+    width: 85%;
+    height: 85%;
+}
+
+.fullVideoPlayer{
+    width: 90%;
+    height: 90%;
+}
+
+.identity{
+    position: absolute;
+    background-color: rgb(74, 73, 73);
+    color: white;
+    top: 3%;
+    /* left: 5%; */
+}
+
+.identity h3{
+    margin: 0;
+    padding: 0.25rem;
+}
+
+.identityHidden{
+    display: none;
+    position: absolute;
+    background-color: rgb(74, 73, 73);
+    color: white;
+    top: 3%;
+}

@@ -7,35 +7,3 @@
     align-items: center;
     background-color: #1d1d1dfc;
 }
-
-.videoPortals{
-    width: 100%;
-    height: 100%;
-    margin-top: 1rem;
-}
-
-.box {
-    box-sizing: border-box;
-    position: relative;
-    float: left;
-    width: 50%;
-    height: 50%;
-}
-
-.videoPlayer{
-    width: 85%;
-    height: 85%;
-}
-
-.identity{
-    position: absolute;
-    background-color: rgb(74, 73, 73);
-    color: white;
-    top: 0;
-    left: 5%;
-}
-
-.identity h3{
-    margin: 0;
-    padding: 0.25rem;
-}
