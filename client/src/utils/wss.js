@@ -1,5 +1,5 @@
 import { roomActions } from "../store/room";
-import { prepareNewPeerConnection, signalingDataHandler } from "../services/webRTC";
+import { prepareNewPeerConnection, signalingDataHandler, removePeerConnection } from "../services/webRTC";
 import socketIO from "socket.io-client";
 
 const SERVER = "http://localhost:5000";
@@ -31,7 +31,12 @@ export const connectWithSocketIOServer = (dispatch) => {
     webSocket.on("connection-init", (data) => {
         const { existingUser } = data;
         prepareNewPeerConnection(existingUser, true, dispatch);
-    })
+    });
+
+    webSocket.on("user-disconncted", (data) => {
+        const { userSocketId } = data;
+        removePeerConnection(userSocketId, dispatch);
+    });
 }
 
 export const createNewRoom = (identity) => {

@@ -13,8 +13,6 @@ const defaultConstraints = {
   },
 };
 
-const showLocalVideoPreview = (stream) => {};
-
 const getConfiguration = () => {
   return {
     iceServers: [
@@ -35,8 +33,8 @@ export const getLocalPreviewAndInitRoomConnection = async (
     .getUserMedia(defaultConstraints)
     .then((stream) => {
       localStream = stream;
-      dispatch(roomActions.setStreams(localStream));
-      showLocalVideoPreview(localStream);
+      incomingStreams.push(localStream);
+      dispatch(roomActions.setStreams(incomingStreams));
 
       if (isRommHost) {
         createNewRoom(identity);
@@ -80,8 +78,8 @@ export const prepareNewPeerConnection = (
       userSocketId: newUserSocketId,
       liveStream: remoteStream
     };
-    dispatch(roomActions.setStreams(userStream));
-    incomingStreams.push(remoteStream);
+    incomingStreams.push(userStream);
+    dispatch(roomActions.setStreams(incomingStreams));
   });
 };
 
@@ -89,4 +87,10 @@ export const signalingDataHandler = (data) => {
   const { signal, existSocketId } = data;
 
   peers[existSocketId].signal(signal);
+};
+
+export const removePeerConnection = (userSocketId, dispatch) => {
+  // incomingStreams.forEach(stream => {
+  //   if
+  // });
 };

@@ -112,6 +112,9 @@ const disconnection = (socket) => {
     
         socket.leave(userLeave.roomId);
 
+        // emit to all users which are still in the room that user disconnected
+        io.to(room.id).emit("user-disconnected", { userSocketId: socket.id });
+
         if(room.connectedUsers.length > 0){
             io.to(room.id).emit("room-update", {connectedUsers: room.connectedUsers});
         }else{

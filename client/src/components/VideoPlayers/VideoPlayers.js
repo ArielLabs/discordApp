@@ -19,15 +19,12 @@ const VideoPlayers = () => {
   const zoomHandler = (event) => {
     const videoClass = document.getElementById(event.target.id);
     const boxClass = document.getElementById(event.target.id + "Box");
-    const identityClass = document.getElementById(event.target.id + "Identity");
 
     setZoomVideo((prevState) => {
       if (prevState) {
-        document
-          .querySelectorAll(".videoPlayer")
-          .forEach((videoPlayerClass) => {
+        document.querySelectorAll(".videoPlayer").forEach((videoPlayerClass) => {
             videoPlayerClass.style.display = "initial";
-          });
+        });
         document.querySelectorAll(".identity").forEach((identityclass) => {
             identityclass.classList.toggle("identityHidden");
         });
@@ -38,13 +35,11 @@ const VideoPlayers = () => {
         document.querySelectorAll(".identity").forEach((identityclass) => {
             identityclass.classList.toggle("identityHidden");
         });
-        document
-          .querySelectorAll(".videoPlayer")
-          .forEach((videoPlayerClass) => {
+        document.querySelectorAll(".videoPlayer").forEach((videoPlayerClass) => {
             if (videoPlayerClass.id !== event.target.id) {
               videoPlayerClass.style.display = "none";
             }
-          });
+        });
         boxClass.classList.toggle("fullBoxScreen");
         videoClass.classList.toggle("fullVideoPlayer");
         return event.target.id;
@@ -62,21 +57,27 @@ const VideoPlayers = () => {
       const user = participants.find(
         (participant) => participant.socketId === streams[1].userSocketId
       );
-      userNameSecond.current.innerText = user.username;
+      if(user){
+        userNameSecond.current.innerText = user.username;
+      }
     }
     if (videoRefThird.current && streams.length > 2) {
       videoRefThird.current.srcObject = streams[2].liveStream;
       const user = participants.find(
         (participant) => participant.socketId === streams[2].userSocketId
       );
-      userNameThird.current.innerText = user.username;
+      if(user){
+        userNameThird.current.innerText = user.username;
+      }
     }
     if (videoRefFourth.current && streams.length > 3) {
       videoRefFourth.current.srcObject = streams[3].liveStream;
       const user = participants.find(
         (participant) => participant.socketId === streams[3].userSocketId
       );
-      userNameFourth.current.innerText = user.username;
+      if(user){
+        userNameFourth.current.innerText = user.username;
+      }
     }
   }, [streams, participants, identity]);
 

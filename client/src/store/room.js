@@ -29,7 +29,7 @@ const roomSlice = createSlice({
             state.participants = [...action.payload];
         },
         setStreams(state, action){
-            state.streams.push(action.payload);
+            state.streams = [...action.payload];
         }
     }
 })
