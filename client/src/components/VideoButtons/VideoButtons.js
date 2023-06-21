@@ -23,6 +23,7 @@ const VideoButtons = () => {
   };
 
   const pressCameraButtonHandler = () => {
+    dispatch(roomActions.setIsDisplayVideo());
     setIsLocalVideoDisabled((prevState) => !prevState);
   };
 

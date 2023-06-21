@@ -6,7 +6,7 @@ const VideoPlayerItem = (props) => {
   const usernameRef = useRef();
   const videoRef = useRef(null);
   const { stream } = props;
-  const { participants, identity, isMuted } = useSelector(
+  const { participants, identity, isMuted, isDisplayVideo } = useSelector(
     (state) => state.room
   );
   let zoomVideo = false;
@@ -62,10 +62,24 @@ const VideoPlayerItem = (props) => {
     let videoElement = document.getElementById(`${stream.userSocketId}`);
     if (isMuted && stream.userSocketId === "1") {
       videoElement.muted = true;
-    }else{
+    } else {
       videoElement.muted = false;
     }
   }, [isMuted, stream]);
+
+  useEffect(() => {
+    let videoElement = document.getElementById(`${stream.userSocketId}`);
+    let identityElement = document.getElementById(`${stream.userSocketId}Identity`);
+    if (!isDisplayVideo && stream.userSocketId === "1") {
+      videoElement.style.display="none";
+      identityElement.classList.remove("identity");
+      identityElement.classList.add("identityFull");
+    } else {
+      videoElement.style.display="initial";
+      identityElement.classList.remove("identityFull");
+      identityElement.classList.add("identity");
+    }
+  }, [isDisplayVideo, stream]);
 
   return (
     <div id={`${stream.userSocketId}Box`} className="box">

@@ -46,3 +46,17 @@
     color: white;
     top: 3%;
 }
+
+.identityFull{
+    position: absolute;
+    background-color: rgb(74, 73, 73);
+    color: white;
+    width: 75%;
+    height: 96%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}

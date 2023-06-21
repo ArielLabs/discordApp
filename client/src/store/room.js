@@ -36,8 +36,8 @@ const roomSlice = createSlice({
         setIsMuted(state){
             state.isMuted = !state.isMuted;
         },
-        setIsDisplayVideo(state, action){
-            state.isDisplayVideo = action.payload;
+        setIsDisplayVideo(state){
+            state.isDisplayVideo = !state.isDisplayVideo;
         }
     }
 })
