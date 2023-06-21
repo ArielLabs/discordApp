@@ -1,0 +1,10 @@
+.videoPortals{
+    width: 95%;
+    height: 85%;
+}
+
+@media screen and (max-height: 720px) {
+    .videoPortals{
+        height: 80%;
+    }
+}

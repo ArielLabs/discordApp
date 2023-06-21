@@ -4,7 +4,7 @@ import Peer from "simple-peer";
 
 let localStream;
 let peers = {};
-const incomingStreams = [];
+let incomingStreams = [];
 const defaultConstraints = {
   audio: true,
   video: {
@@ -33,7 +33,12 @@ export const getLocalPreviewAndInitRoomConnection = async (
     .getUserMedia(defaultConstraints)
     .then((stream) => {
       localStream = stream;
-      incomingStreams.push(localStream);
+      incomingStreams.push({
+        userSocketId: "1",
+        liveStream: localStream,
+        isActive: true
+      });
+      // incomingStreams.push(localStream);
       dispatch(roomActions.setStreams(incomingStreams));
 
       if (isRommHost) {
@@ -76,8 +81,14 @@ export const prepareNewPeerConnection = (
     console.log("new remote stream");
     const userStream = {
       userSocketId: newUserSocketId,
-      liveStream: remoteStream
+      liveStream: remoteStream,
+      isActive: true
     };
+
+    // remove disactive stream
+    incomingStreams = incomingStreams.filter((stream) => stream.isActive !== false);
+
+    // add new remote stream
     incomingStreams.push(userStream);
     dispatch(roomActions.setStreams(incomingStreams));
   });
@@ -90,7 +101,18 @@ export const signalingDataHandler = (data) => {
 };
 
 export const removePeerConnection = (userSocketId, dispatch) => {
-  // incomingStreams.forEach(stream => {
-  //   if
-  // });
+  const turnOffStreamIdx = incomingStreams.findIndex((stream) => stream.userSocketId === userSocketId);
+  incomingStreams[turnOffStreamIdx] = {
+    userSocketId: userSocketId,
+    liveStream: null,
+    isActive: false
+  };
+
+  dispatch(roomActions.setStreams(incomingStreams));
+
+  if(peers[userSocketId]){
+    peers[userSocketId].destroy();
+  }
+
+  delete peers[userSocketId];
 };

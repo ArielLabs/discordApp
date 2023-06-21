@@ -33,7 +33,7 @@ export const connectWithSocketIOServer = (dispatch) => {
         prepareNewPeerConnection(existingUser, true, dispatch);
     });
 
-    webSocket.on("user-disconncted", (data) => {
+    webSocket.on("user-disconnected", (data) => {
         const { userSocketId } = data;
         removePeerConnection(userSocketId, dispatch);
     });

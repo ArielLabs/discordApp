@@ -1,14 +1,11 @@
-.videoPortals{
-    width: 95%;
-    height: 85%;
-}
-
 .box {
     box-sizing: border-box;
     position: relative;
     float: left;
     width: 50%;
     height: 50%;
+    display: flex;
+    flex-direction: column;
 }
 
 .fullBoxScreen{
@@ -21,8 +18,7 @@
 }
 
 .videoPlayer{
-    width: 85%;
-    height: 85%;
+    width: 75%;
 }
 
 .fullVideoPlayer{
@@ -31,11 +27,11 @@
 }
 
 .identity{
-    position: absolute;
+    /* position: absolute; */
     background-color: rgb(74, 73, 73);
     color: white;
-    top: 3%;
-    /* left: 5%; */
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
 }
 
 .identity h3{

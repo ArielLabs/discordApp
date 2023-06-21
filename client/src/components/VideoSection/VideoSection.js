@@ -2,11 +2,11 @@ import React from "react";
 import RoomLabel from "../RoomLabel/RoomLabel";
 import VideoPlayers from "../VideoPlayers/VideoPlayers";
 import VideoButtons from "../VideoButtons/VideoButtons";
-import "./VideoSection.css";
+import styles from "./VideoSection.module.css";
 
 const VideoSection = (props) => {
   return (
-    <div className="videoContainer">
+    <div className={styles.videoContainer}>
       <RoomLabel id={props.roomId} />
       <VideoPlayers />
       <VideoButtons />
