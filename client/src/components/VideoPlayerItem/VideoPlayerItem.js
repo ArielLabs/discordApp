@@ -6,7 +6,9 @@ const VideoPlayerItem = (props) => {
   const usernameRef = useRef();
   const videoRef = useRef(null);
   const { stream } = props;
-  const { participants, identity } = useSelector((state) => state.room);
+  const { participants, identity, isMuted } = useSelector(
+    (state) => state.room
+  );
   let zoomVideo = false;
 
   const zoomHandler = (event) => {
@@ -55,6 +57,15 @@ const VideoPlayerItem = (props) => {
       }
     }
   }, [stream, participants, identity]);
+
+  useEffect(() => {
+    let videoElement = document.getElementById(`${stream.userSocketId}`);
+    if (isMuted && stream.userSocketId === "1") {
+      videoElement.muted = true;
+    }else{
+      videoElement.muted = false;
+    }
+  }, [isMuted, stream]);
 
   return (
     <div id={`${stream.userSocketId}Box`} className="box">

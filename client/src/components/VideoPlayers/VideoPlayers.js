@@ -8,7 +8,7 @@ const VideoPlayers = () => {
   return (
     <div className={styles.videoPortals}>
       {streams.map((stream) => (
-        <VideoPlayerItem key={streams.userSocketId} stream={stream} />
+        <VideoPlayerItem key={stream.userSocketId} stream={stream} />
       ))}
     </div> 
   );

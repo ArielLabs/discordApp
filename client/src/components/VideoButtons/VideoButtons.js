@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { roomActions } from "../../store/room";
 import IconButton from "@mui/material/IconButton";
 import MicNoneOutlinedIcon from "@mui/icons-material/MicNoneOutlined";
 import MicOffOutlinedIcon from "@mui/icons-material/MicOffOutlined";
@@ -10,11 +12,13 @@ import styles from "./VideoButtons.module.css";
 
 const VideoButtons = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isLocalVideoDisabled, setIsLocalVideoDisabled] = useState(false);
   const [isSharingScreenActive, setIsSharingScreenActive] = useState(false);
 
   const pressMicButtonHandler = () => {
+    dispatch(roomActions.setIsMuted());
     setIsMicMuted((prevState) => !prevState);
   };
 
