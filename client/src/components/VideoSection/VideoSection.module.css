@@ -6,4 +6,5 @@
     flex-direction: column;
     align-items: center;
     background-color: #1d1d1dfc;
+    border-right: 2px solid #5a5959;
 }
