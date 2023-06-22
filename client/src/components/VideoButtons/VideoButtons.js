@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { roomActions } from "../../store/room";
+import { leaveRoom } from "../../utils/wss";
 import IconButton from "@mui/material/IconButton";
 import MicNoneOutlinedIcon from "@mui/icons-material/MicNoneOutlined";
 import MicOffOutlinedIcon from "@mui/icons-material/MicOffOutlined";
@@ -29,6 +30,7 @@ const VideoButtons = () => {
 
   const pressLeaveRoomHandler = () => {
     navigate("/");
+    leaveRoom();
   };
 
   const pressSharingScreenButtonHandler = () => {

@@ -12,7 +12,7 @@ const io = new Server(httpServer, {
         origin: "*",
         methods: ["GET", "POST"]
     }
-})
+});
 
 app.use(cors());
 
@@ -141,6 +141,10 @@ io.on('connection', (socket) => {
 
     socket.on("connection-init", (data) => {
         initializeConnect(socket, data);
+    })
+
+    socket.on('leave-room', () => {
+        disconnection(socket);
     })
 
     socket.on('disconnect', () => {

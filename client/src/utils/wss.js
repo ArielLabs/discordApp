@@ -59,3 +59,7 @@ export const joinRoom = (identity, roomId) => {
 export const signalPeerData = (data) => {
     webSocket.emit('connection-signal', data);
 }
+
+export const leaveRoom = () => {
+    webSocket.emit("leave-room");
+}
