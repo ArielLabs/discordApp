@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { roomActions } from "../../store/room";
 import { leaveRoom } from "../../utils/wss";
+import { toggleScreenShare } from "../../services/webRTC";
+import LocalScreenSharing from "../LocalScreenSharing/LocalScreenSharing";
 import IconButton from "@mui/material/IconButton";
 import MicNoneOutlinedIcon from "@mui/icons-material/MicNoneOutlined";
 import MicOffOutlinedIcon from "@mui/icons-material/MicOffOutlined";
@@ -17,6 +19,7 @@ const VideoButtons = () => {
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isLocalVideoDisabled, setIsLocalVideoDisabled] = useState(false);
   const [isSharingScreenActive, setIsSharingScreenActive] = useState(false);
+  const [screenSharingStream, setScreenSharingStream] = useState(null);
 
   const pressMicButtonHandler = () => {
     dispatch(roomActions.setIsMuted());
@@ -33,12 +36,38 @@ const VideoButtons = () => {
     leaveRoom();
   };
 
-  const pressSharingScreenButtonHandler = () => {
-    setIsSharingScreenActive((prevState) => !prevState);
+  const pressSharingScreenButtonHandler = async () => {
+    // setIsSharingScreenActive((prevState) => !prevState);
+    if(!isSharingScreenActive){
+      let shareStream = null;
+      try{
+        shareStream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: false});
+      }catch(err){
+        console.log("error occured when try to get an access to screen share stream");
+      }
+      if(shareStream){
+        setScreenSharingStream(shareStream);
+        toggleScreenShare(isSharingScreenActive, shareStream);
+
+        setIsSharingScreenActive(true);
+      }
+    }else{
+      // switch stream from camera
+      toggleScreenShare(isSharingScreenActive);
+      setIsSharingScreenActive(false);
+
+      // stop screen share 
+      screenSharingStream.getTracks().forEach(element => element.stop());
+      setScreenSharingStream(null);
+    }
+
   };
 
   return (
     <div className={styles.buttonsContainer}>
+      {isSharingScreenActive && (
+        <LocalScreenSharing stream={screenSharingStream} />
+      )}
       <IconButton size="large" onClick={pressMicButtonHandler}>
         {!isMicMuted && <MicNoneOutlinedIcon sx={{ color: "white" }} />}
         {isMicMuted && <MicOffOutlinedIcon sx={{ color: "white" }} />}
