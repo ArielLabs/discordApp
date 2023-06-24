@@ -5,12 +5,21 @@ import wallpapaer from "../../assets/images/wallpaper.jpg";
 import styles from "./ChatSection.module.css";
 
 const ChatSection = () => {
-    return(
-        <div style={{ backgroundImage: `url(${wallpapaer})`, width: "25%" }}>
-            <Messages />
-            <InputMessage />
-        </div>
-    );
-}
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${wallpapaer})`,
+        width: "25%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between"
+      }}
+    >
+      <Messages />
+      <InputMessage />
+    </div>
+  );
+};
 
 export default ChatSection;

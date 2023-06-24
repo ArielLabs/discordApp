@@ -11,6 +11,7 @@ import MicOffOutlinedIcon from "@mui/icons-material/MicOffOutlined";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import VideocamOffOutlinedIcon from "@mui/icons-material/VideocamOffOutlined";
 import CameraswitchOutlinedIcon from '@mui/icons-material/CameraswitchOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import styles from "./VideoButtons.module.css";
 
 const VideoButtons = () => {
@@ -37,7 +38,6 @@ const VideoButtons = () => {
   };
 
   const pressSharingScreenButtonHandler = async () => {
-    // setIsSharingScreenActive((prevState) => !prevState);
     if(!isSharingScreenActive){
       let shareStream = null;
       try{
@@ -80,9 +80,6 @@ const VideoButtons = () => {
           <VideocamOffOutlinedIcon sx={{ color: "white" }} />
         )}
       </IconButton>
-      <button className={styles.leaveBtn} onClick={pressLeaveRoomHandler}>
-        Leave Room
-      </button>
       <IconButton size="large" onClick={pressSharingScreenButtonHandler}>
         {!isSharingScreenActive && (
           <CameraswitchOutlinedIcon sx={{ color: "white" }} />
@@ -90,6 +87,9 @@ const VideoButtons = () => {
         {isSharingScreenActive && (
           <CameraswitchOutlinedIcon sx={{ color: "white" }} />
         )}
+      </IconButton>
+      <IconButton size="large" onClick={pressLeaveRoomHandler}>
+        <LogoutIcon sx={{ color: "white" }} />
       </IconButton>
     </div>
   );
