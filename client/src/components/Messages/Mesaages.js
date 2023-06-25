@@ -8,7 +8,7 @@ const Messages = () => {
         console.log(messages);
     }, [messages]);
     return(
-        <div></div>
+        <div className={styles.messgaesContainer}></div>
     );
 }
 
