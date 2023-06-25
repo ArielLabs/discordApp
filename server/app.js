@@ -36,7 +36,8 @@ const createNewRoom = (socket, data) => {
   
     const newRoom = {
       id: roomId,
-      connectedUsers: [newUser]
+      connectedUsers: [newUser],
+      messagesUsers: []
     };
   
     socket.join(roomId);
@@ -77,6 +78,26 @@ const joinRoom = (socket, data) => {
     });
 
     io.to(roomId).emit("room-update",  {connectedUsers: chosenRoom.connectedUsers});
+};
+
+
+const sendMessage = (socket, data) => {
+    const { roomId, content, date } = data;
+
+    const room = allRooms.find((r) => r.id === roomId);
+
+    const writer = room.connectedUsers.find((user) => user.socketId === socket.id);
+
+    const newMessage = {
+        userId: writer.userId,
+        username: writer.username,
+        content: content,
+        date: date
+    }
+
+    room.messagesUsers.push(newMessage);
+
+    io.to(roomId).emit("messages-update", {messagesUsers: room.messagesUsers});
 };
 
 
@@ -133,6 +154,10 @@ io.on('connection', (socket) => {
     
     socket.on("join-room", (data) => {
         joinRoom(socket, data);
+    });
+
+    socket.on("send-message", (data) => {
+        sendMessage(socket, data);
     });
 
     socket.on("connection-signal", (data) => {

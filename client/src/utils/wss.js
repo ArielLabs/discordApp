@@ -17,6 +17,11 @@ export const connectWithSocketIOServer = (dispatch) => {
         dispatch(roomActions.setParticipants(connectedUsers));
     });
 
+    webSocket.on('messages-update', (data) => {
+        const { messagesUsers } = data;
+        dispatch(roomActions.setMessages(messagesUsers));
+    })
+
     webSocket.on('connection-prepare', (data) => {
         const { newUserSocketId } = data;
         prepareNewPeerConnection(newUserSocketId, false, dispatch);
@@ -54,6 +59,10 @@ export const joinRoom = (identity, roomId) => {
     }
 
     webSocket.emit('join-room', data);
+}
+
+export const sendMessage = (message) => {
+    webSocket.emit("send-message", message);
 }
 
 export const signalPeerData = (data) => {

@@ -8,7 +8,8 @@ const initRoomState = {
     isMuted: false,
     isDisplayVideo: true,
     participants: [],
-    streams: []
+    streams: [],
+    messages: []
 }
 
 const roomSlice = createSlice({
@@ -32,6 +33,9 @@ const roomSlice = createSlice({
         },
         setStreams(state, action){
             state.streams = [...action.payload];
+        },
+        setMessages(state, action){
+            state.messages = [...action.payload];
         },
         setIsMuted(state){
             state.isMuted = !state.isMuted;
