@@ -89,6 +89,7 @@ const sendMessage = (socket, data) => {
     const writer = room.connectedUsers.find((user) => user.socketId === socket.id);
 
     const newMessage = {
+        id: uuidv4(),
         userId: writer.userId,
         username: writer.username,
         content: content,

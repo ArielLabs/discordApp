@@ -18,7 +18,7 @@
 .inputMsg{
     /* width: 89%;
     padding: 5%; */
-    width: 72%;
+    width: 85%;
     padding: 3%;
     border: none;
     font: inherit;
@@ -43,6 +43,6 @@
     position: absolute;
     box-sizing:border-box;
     top:50%;
-    right:5%;
+    right:1%;
     transform: translateY(-50%);
 }

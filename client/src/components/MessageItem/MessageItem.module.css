@@ -1,0 +1,39 @@
+.itemContainer{
+    background-color: rgb(126 143 165 / 85%);
+    max-width: 90%;
+    min-width: 10%;
+    width: fit-content;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    border-radius: 0 15px 15px 15px;
+}
+
+.displayName{
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #e1b3a1;
+}
+
+.messageBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content{
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    padding: 0.25rem 0;
+}
+
+.time{
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: right;
+}
