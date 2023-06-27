@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { roomActions } from "../../store/room";
 import { useLocation, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -52,6 +53,7 @@ const JoinRoomPage = () => {
   };
 
   const createRoom = () => {
+    dispatch(roomActions.setUserId(uuidv4()));
     navigate('/room');
   }
 
@@ -71,6 +73,7 @@ const JoinRoomPage = () => {
           setError("Meeting is full, please try again later.");
         }else{
           dispatch(roomActions.setRoomId(roomId));
+          dispatch(roomActions.setUserId(uuidv4()));
           navigate('/room');
         }
       }else{

@@ -16,8 +16,6 @@
 } */
 
 .inputMsg{
-    /* width: 89%;
-    padding: 5%; */
     width: 85%;
     padding: 3%;
     border: none;
@@ -45,4 +43,10 @@
     top:50%;
     right:1%;
     transform: translateY(-50%);
+}
+
+@media screen and (max-height: 720px) {
+    .inputMsg{
+        padding: 1%;
+    }
 }

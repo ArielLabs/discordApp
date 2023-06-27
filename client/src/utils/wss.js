@@ -44,17 +44,19 @@ export const connectWithSocketIOServer = (dispatch) => {
     });
 }
 
-export const createNewRoom = (identity) => {
+export const createNewRoom = (userId, identity) => {
     const data = {
+        userId: userId,
         identity: identity
     }
 
     webSocket.emit('create-new-room', data);
 }
 
-export const joinRoom = (identity, roomId) => {
+export const joinRoom = (userId, identity, roomId) => {
     const data = {
         roomId: roomId,
+        userId: userId,
         identity: identity
     }
 

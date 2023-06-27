@@ -7,12 +7,12 @@ import ChatSection from "../../components/ChatSection/ChatSection";
 import styles from "./RoomPage.module.css";
 
 const RoomPage = () => {
-  const { id, identity, isRoomHost } = useSelector((state) => state.room);
+  const { id, userId,  identity, isRoomHost } = useSelector((state) => state.room);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getLocalPreviewAndInitRoomConnection(isRoomHost, identity, id, dispatch);
-  }, [identity, isRoomHost, dispatch]);
+    getLocalPreviewAndInitRoomConnection(isRoomHost, userId, identity, id, dispatch);
+  }, [identity, userId, isRoomHost, dispatch]);
 
   return (
     <div className={styles.roomPage}>

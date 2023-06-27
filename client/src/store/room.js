@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initRoomState = {
     id: null,
+    userId: null,
     identity: '',
     isRoomHost: false,
     connectWithAudio: false,
@@ -18,6 +19,9 @@ const roomSlice = createSlice({
     reducers: {
         setRoomId(state, action){
             state.id = action.payload;
+        },
+        setUserId(state, action){
+            state.userId = action.payload;
         },
         setIdentity(state, action){
             state.identity = action.payload;

@@ -22,12 +22,12 @@ let allConnectedUsers = [];
 const createNewRoom = (socket, data) => {
     console.log("host is creating new room");
   
-    const { identity } = data;
+    const { userId, identity } = data;
     const roomId = uuidv4();
   
     const newUser = {
       username: identity,
-      userId: uuidv4(),
+      userId: userId,
       roomId: roomId,
       socketId: socket.id 
     };
@@ -53,11 +53,11 @@ const createNewRoom = (socket, data) => {
   
   
 const joinRoom = (socket, data) => {
-    const { identity, roomId } = data;
+    const { identity, roomId, userId } = data;
   
     const newUser = {
       username: identity,
-      userId: uuidv4(),
+      userId: userId,
       roomId: roomId,
       socketId: socket.id
     }

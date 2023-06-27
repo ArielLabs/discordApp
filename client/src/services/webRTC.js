@@ -46,6 +46,7 @@ const switchVideoTracks = (stream) => {
 
 export const getLocalPreviewAndInitRoomConnection = async (
   isRommHost,
+  userId, 
   identity,
   roomId = null,
   dispatch
@@ -63,9 +64,9 @@ export const getLocalPreviewAndInitRoomConnection = async (
       dispatch(roomActions.setStreams(incomingStreams));
 
       if (isRommHost) {
-        createNewRoom(identity);
+        createNewRoom(userId, identity);
       } else {
-        joinRoom(identity, roomId);
+        joinRoom(userId, identity, roomId);
       }
     })
     .catch((err) => {
