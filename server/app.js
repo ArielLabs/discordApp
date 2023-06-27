@@ -37,8 +37,10 @@ const createNewRoom = (socket, data) => {
     const newRoom = {
       id: roomId,
       connectedUsers: [newUser],
-      messagesUsers: []
+      messagesUsers: {}
     };
+
+    newRoom.messagesUsers[newUser.socketId] = [];
   
     socket.join(roomId);
   
@@ -64,6 +66,7 @@ const joinRoom = (socket, data) => {
   
     const chosenRoom = allRooms.find((room) => room.id === roomId);
     chosenRoom.connectedUsers.push(newUser);
+    chosenRoom.messagesUsers[newUser.socketId] = [];
   
     socket.join(roomId);
 
@@ -96,9 +99,11 @@ const sendMessage = (socket, data) => {
         date: date
     }
 
-    room.messagesUsers.push(newMessage);
-
-    io.to(roomId).emit("messages-update", {messagesUsers: room.messagesUsers});
+    Object.keys(room.messagesUsers).forEach(userSocketId => {
+        console.log(userSocketId);
+        room.messagesUsers[userSocketId].push(newMessage);
+        io.to(userSocketId).emit("messages-update", {messagesUsers: room.messagesUsers[userSocketId]});
+    });
 };
 
 
