@@ -11,12 +11,12 @@ const InputMessage = () => {
 
   const sendMessageByKeyPressHandler = (event) => {
     contentRef.current.value = event.target.value;
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && contentRef.current.value.length > 0) {
       const newMessage = {
         roomId: id,
         content: contentRef.current.value,
-        date: new Date().toLocaleString('en-GB')
-      }
+        date: new Date().toLocaleString("en-GB"),
+      };
       sendMessage(newMessage);
       contentRef.current.value = "";
     }
@@ -25,13 +25,15 @@ const InputMessage = () => {
   const sendMessageByClickHandler = (event) => {
     event.preventDefault();
 
-    const newMessage = {
-      roomId: id,
-      content: contentRef.current.value,
-      date: new Date().toLocaleString('en-GB')
+    if (contentRef.current.value.length > 0) {
+      const newMessage = {
+        roomId: id,
+        content: contentRef.current.value,
+        date: new Date().toLocaleString("en-GB"),
+      };
+      sendMessage(newMessage);
+      contentRef.current.value = "";
     }
-    sendMessage(newMessage);
-    contentRef.current.value = "";
   };
 
   return (
