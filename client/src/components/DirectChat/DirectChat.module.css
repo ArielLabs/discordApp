@@ -1,0 +1,26 @@
+.directChatContainer{
+    height: 50%;
+}
+
+.onlyHeaderdirectChat{
+    height: 5%;
+}
+
+.header{
+    cursor: pointer;
+    height: 10%;
+    background-color: #0b8ab0c4;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.onlyHeader{
+    cursor: pointer;
+    height: 100%;
+    background-color: #0b8ab0c4;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.bodyDirectChat{
+    height: 90%;
+    background-color: aliceblue;
+}

@@ -10,10 +10,17 @@ const ParticipantsSection = () => {
   return (
     <div className={styles.participantsContainer}>
       <ParticipantsHeader number={participants.length} />
-      {participants.map((participant) => (
-        <ParticipantItem key={participant.userId} name={participant.username} />
-      ))}
-      <DirectChat />
+      <div className={styles.details}>
+        <div className={styles.list}>
+          {participants.map((participant) => (
+            <ParticipantItem
+              key={participant.userId}
+              name={participant.username}
+            />
+          ))}
+        </div>
+        <DirectChat />
+      </div>
     </div>
   );
 };
