@@ -1,9 +1,9 @@
 .directChatContainer{
-    height: 50%;
+    height: 55%;
 }
 
 .onlyHeaderdirectChat{
-    height: 5%;
+    height: 5.5%;
 }
 
 .header{
@@ -11,6 +11,11 @@
     height: 10%;
     background-color: #0b8ab0c4;
     border-radius: 15px 15px 0px 0px;
+    box-shadow: 2px 2px 8px 2px;
+}
+
+.header:hover{
+    background-color: #199ec7c4;
 }
 
 .onlyHeader{
@@ -18,9 +23,22 @@
     height: 100%;
     background-color: #0b8ab0c4;
     border-radius: 15px 15px 0px 0px;
+    box-shadow: 2px 2px 8px 2px;
+}
+
+.onlyHeader:hover{
+    background-color: #199ec7c4;
 }
 
 .bodyDirectChat{
     height: 90%;
-    background-color: aliceblue;
+    background-color: #8f58a67a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.messages{
+    height: 85%;
 }

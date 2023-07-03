@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import styles from "./DirectChat.module.css";
+import InputMessage from "../InputMessage/InputMessage";
 
 const DirectChat = (props) => {
   const [toggleDirectChat, setToggleDirectChat] = useState(false);
@@ -23,7 +24,14 @@ const DirectChat = (props) => {
         {!toggleDirectChat && <KeyboardArrowUpIcon sx={{fontSize: "1.5rem", float: "right", marginRight: "2rem"}} />}
         {toggleDirectChat && <KeyboardArrowDownIcon sx={{fontSize: "1.5rem", float: "right", marginRight: "2rem"}} />}
       </div>
-      {toggleDirectChat && <div className={styles.bodyDirectChat}></div>}
+      {toggleDirectChat && (
+        <div className={styles.bodyDirectChat}>
+          <div className={styles.messages}>
+            
+          </div>
+          <InputMessage />
+        </div>
+      )}
     </div>
   );
 };
