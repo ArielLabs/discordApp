@@ -9,9 +9,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 90%;
+    height: 92%;
 }
 
 .list{
     height: 40%;
+}
+
+@media screen and (max-height: 720px) {
+    .details{
+        height: 10%;
+    }
 }

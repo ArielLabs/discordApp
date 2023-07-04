@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import styles from "./DirectChat.module.css";
@@ -6,6 +7,8 @@ import InputMessage from "../InputMessage/InputMessage";
 
 const DirectChat = (props) => {
   const [toggleDirectChat, setToggleDirectChat] = useState(false);
+  const { activeConversation } = useSelector((state) => state.room);
+
   const toggleDirectChatHandler = () => {
     setToggleDirectChat((prevState) => !prevState);
   };
@@ -21,8 +24,9 @@ const DirectChat = (props) => {
   return (
     <div className={directChatContainerClass}>
       <div className={headerDirectChatClass} onClick={toggleDirectChatHandler}>
-        {!toggleDirectChat && <KeyboardArrowUpIcon sx={{fontSize: "1.5rem", float: "right", marginRight: "2rem"}} />}
-        {toggleDirectChat && <KeyboardArrowDownIcon sx={{fontSize: "1.5rem", float: "right", marginRight: "2rem"}} />}
+        <span className={styles.identity}>{activeConversation ? activeConversation.identity : ""}</span>
+        {!toggleDirectChat && <KeyboardArrowUpIcon className={styles.icon} />}
+        {toggleDirectChat && <KeyboardArrowDownIcon className={styles.icon} />}
       </div>
       {toggleDirectChat && (
         <div className={styles.bodyDirectChat}>

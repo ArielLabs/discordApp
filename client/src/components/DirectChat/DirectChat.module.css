@@ -8,6 +8,10 @@
 
 .header{
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    gap: 30%;
+    align-items: center;
     height: 10%;
     background-color: #0b8ab0c4;
     border-radius: 15px 15px 0px 0px;
@@ -20,6 +24,10 @@
 
 .onlyHeader{
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30%;
     height: 100%;
     background-color: #0b8ab0c4;
     border-radius: 15px 15px 0px 0px;
@@ -41,4 +49,19 @@
 
 .messages{
     height: 85%;
+}
+
+.identity{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.icon{
+    font-size: 2rem;
+}
+
+@media screen and (max-height: 720px) {
+    .icon{
+        font-size: 1.5rem;
+    }
 }

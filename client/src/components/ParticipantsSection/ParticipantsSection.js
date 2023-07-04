@@ -16,6 +16,7 @@ const ParticipantsSection = () => {
             <ParticipantItem
               key={participant.userId}
               name={participant.username}
+              userId={participant.userId}
             />
           ))}
         </div>

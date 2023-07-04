@@ -10,7 +10,9 @@ const initRoomState = {
     isDisplayVideo: true,
     participants: [],
     streams: [],
-    messages: []
+    messages: [],
+    activeConversation: null,
+    directChatHistory: {}
 }
 
 const roomSlice = createSlice({
@@ -40,6 +42,9 @@ const roomSlice = createSlice({
         },
         setMessages(state, action){
             state.messages = [...action.payload];
+        },
+        setActiveConversation(state, action){
+            state.activeConversation = action.payload;
         },
         setIsMuted(state){
             state.isMuted = !state.isMuted;
