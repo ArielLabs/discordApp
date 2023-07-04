@@ -29,7 +29,8 @@ const createNewRoom = (socket, data) => {
       username: identity,
       userId: userId,
       roomId: roomId,
-      socketId: socket.id 
+      socketId: socket.id,
+      directMessages: {}
     };
   
     allConnectedUsers.push(newUser);
@@ -59,12 +60,19 @@ const joinRoom = (socket, data) => {
       username: identity,
       userId: userId,
       roomId: roomId,
-      socketId: socket.id
+      socketId: socket.id,
+      directMessages: {}
     }
   
     allConnectedUsers.push(newUser);
   
     const chosenRoom = allRooms.find((room) => room.id === roomId);
+
+    chosenRoom.connectedUsers.forEach(user => {
+        user.directMessages[newUser.userId] = [];
+        newUser.directMessages[user.userId] = [];
+    });
+
     chosenRoom.connectedUsers.push(newUser);
     chosenRoom.messagesUsers[newUser.socketId] = [];
   
@@ -100,11 +108,41 @@ const sendMessage = (socket, data) => {
     }
 
     Object.keys(room.messagesUsers).forEach(userSocketId => {
-        console.log(userSocketId);
         room.messagesUsers[userSocketId].push(newMessage);
         io.to(userSocketId).emit("messages-update", {messagesUsers: room.messagesUsers[userSocketId]});
     });
 };
+
+
+const sendDirectMessage = (socket, data) => {
+    const { roomId, destUserId, content, date  } = data;
+
+    const room = allRooms.find((r) => r.id === roomId);
+
+    const writerIdx = room.connectedUsers.findIndex((user) => user.socketId === socket.id);
+    const writer = room.connectedUsers[writerIdx];
+
+    const destUserIdx = room.connectedUsers.findIndex((user) => user.userId === destUserId);
+    const destinationUser = room.connectedUsers[destUserIdx];
+
+    const newMessage = {
+        id: uuidv4(),
+        userId: writer.userId,
+        username: writer.username,
+        content: content,
+        date: date
+    }
+
+    room.connectedUsers.forEach((element, index) => {
+        if(index === writerIdx){
+            room.connectedUsers[index].directMessages[destinationUser.userId].push(newMessage);
+            io.to(writer.socketId).emit("direct-messages-update", {directMsg: writer.directMessages});
+        }else if(index === destUserIdx){
+            room.connectedUsers[index].directMessages[writer.userId].push(newMessage);
+            io.to(destinationUser.socketId).emit("direct-messages-update", {directMsg: destinationUser.directMessages});
+        }
+    });
+}
 
 
 const signaling = (socket, data) => {
@@ -164,6 +202,10 @@ io.on('connection', (socket) => {
 
     socket.on("send-message", (data) => {
         sendMessage(socket, data);
+    });
+
+    socket.on("send-direct-message", (data) => {
+        sendDirectMessage(socket, data);
     });
 
     socket.on("connection-signal", (data) => {

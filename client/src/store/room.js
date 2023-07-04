@@ -12,7 +12,7 @@ const initRoomState = {
     streams: [],
     messages: [],
     activeConversation: null,
-    directChatHistory: {}
+    directChatMessages: {}
 }
 
 const roomSlice = createSlice({
@@ -45,6 +45,9 @@ const roomSlice = createSlice({
         },
         setActiveConversation(state, action){
             state.activeConversation = action.payload;
+        },
+        setDirectChatMessages(state, action){
+            state.directChatMessages = action.payload;
         },
         setIsMuted(state){
             state.isMuted = !state.isMuted;

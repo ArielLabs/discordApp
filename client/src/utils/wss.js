@@ -20,6 +20,11 @@ export const connectWithSocketIOServer = (dispatch) => {
     webSocket.on('messages-update', (data) => {
         const { messagesUsers } = data;
         dispatch(roomActions.setMessages(messagesUsers));
+    });
+
+    webSocket.on("direct-messages-update", (data) => {
+        const { directMsg } = data;
+        dispatch(roomActions.setDirectChatMessages(directMsg));
     })
 
     webSocket.on('connection-prepare', (data) => {
@@ -65,6 +70,10 @@ export const joinRoom = (userId, identity, roomId) => {
 
 export const sendMessage = (message) => {
     webSocket.emit("send-message", message);
+}
+
+export const sendDirectMessage = (message) => {
+    webSocket.emit("send-direct-message", message);
 }
 
 export const signalPeerData = (data) => {

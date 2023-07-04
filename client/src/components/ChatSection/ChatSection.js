@@ -17,7 +17,7 @@ const ChatSection = () => {
       }}
     >
       <Messages />
-      <InputMessage />
+      <InputMessage direct={false} />
     </div>
   );
 };

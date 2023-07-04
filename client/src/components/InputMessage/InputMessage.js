@@ -1,23 +1,33 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-import { sendMessage } from "../../utils/wss";
+import { sendMessage, sendDirectMessage } from "../../utils/wss";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import styles from "./InputMessage.module.css";
 
-const InputMessage = () => {
+const InputMessage = (props) => {
   const contentRef = useRef("");
-  const { id } = useSelector((state) => state.room);
+  const { id, activeConversation } = useSelector((state) => state.room);
 
   const sendMessageByKeyPressHandler = (event) => {
     contentRef.current.value = event.target.value;
     if (event.key === "Enter" && contentRef.current.value.length > 0) {
-      const newMessage = {
-        roomId: id,
-        content: contentRef.current.value,
-        date: new Date().toLocaleString("en-GB"),
-      };
-      sendMessage(newMessage);
+      if (props.direct) {
+        const newDirectMessage = {
+          roomId: id,
+          destUserId: activeConversation.userId,
+          content: contentRef.current.value,
+          date: new Date().toLocaleString("en-GB"),
+        };
+        sendDirectMessage(newDirectMessage);
+      } else {
+        const newMessage = {
+          roomId: id,
+          content: contentRef.current.value,
+          date: new Date().toLocaleString("en-GB"),
+        };
+        sendMessage(newMessage);
+      }
       contentRef.current.value = "";
     }
   };
@@ -26,12 +36,22 @@ const InputMessage = () => {
     event.preventDefault();
 
     if (contentRef.current.value.length > 0) {
-      const newMessage = {
-        roomId: id,
-        content: contentRef.current.value,
-        date: new Date().toLocaleString("en-GB"),
-      };
-      sendMessage(newMessage);
+      if (props.direct) {
+        const newDirectMessage = {
+          roomId: id,
+          destUserId: activeConversation.userId,
+          content: contentRef.current.value,
+          date: new Date().toLocaleString("en-GB"),
+        };
+        sendDirectMessage(newDirectMessage);
+      } else {
+        const newMessage = {
+          roomId: id,
+          content: contentRef.current.value,
+          date: new Date().toLocaleString("en-GB"),
+        };
+        sendMessage(newMessage);
+      }
       contentRef.current.value = "";
     }
   };
